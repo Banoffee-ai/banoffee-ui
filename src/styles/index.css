@@ -1,0 +1,68 @@
+/* src/styles/index.css */
+
+/* 1. Import design tokens (which also imports Tailwind via @import "tailwindcss") */
+@import '../tokens/theme.css';
+
+/* 2. Import DM Sans from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400;1,9..40,700&display=swap');
+
+/* 3. Base resets */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Focus visible — caramel ring */
+  :focus-visible {
+    outline: 2px solid var(--color-caramel);
+    outline-offset: 2px;
+  }
+}
+
+/* 4. Component-layer animations — available globally */
+@layer components {
+  @keyframes bn-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.45; transform: scale(0.75); }
+  }
+
+  @keyframes bn-float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  }
+
+  @keyframes bn-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @keyframes bn-fade-up {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @keyframes bn-scan {
+    0%   { left: -50%; }
+    100% { left: 140%; }
+  }
+
+  .bn-animate-pulse   { animation: bn-pulse   2s ease-in-out infinite; }
+  .bn-animate-float   { animation: bn-float   3s ease-in-out infinite; }
+  .bn-animate-marquee { animation: bn-marquee linear infinite; }
+  .bn-animate-fade-up { animation: bn-fade-up 0.75s ease both; }
+}

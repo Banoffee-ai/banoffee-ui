@@ -1,0 +1,12 @@
+.storybook/
+src/
+*.stories.tsx
+*.test.tsx
+*.test.ts
+vite.config.ts
+tsup.config.ts
+tsconfig*.json
+vitest.config.ts
+tailwind.config.ts
+node_modules/
+.git/
