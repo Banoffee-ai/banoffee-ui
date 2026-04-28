@@ -27,3 +27,17 @@ export type { EyebrowProps } from './components/primitives/Eyebrow'
 export { Divider } from './components/primitives/Divider'
 export type { DividerProps } from './components/primitives/Divider'
 
+// ── Layout ──
+export { Container } from './components/layout/Container'
+export type { ContainerProps } from './components/layout/Container'
+
+export { Section } from './components/layout/Section'
+export type { SectionProps } from './components/layout/Section'
+
+export { Card } from './components/layout/Card'
+export type { CardProps } from './components/layout/Card'
+
+export { Grid } from './components/layout/Grid'
+export type { GridProps } from './components/layout/Grid'
+
+
