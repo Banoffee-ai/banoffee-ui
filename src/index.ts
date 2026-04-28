@@ -40,4 +40,24 @@ export type { CardProps } from './components/layout/Card'
 export { Grid } from './components/layout/Grid'
 export type { GridProps } from './components/layout/Grid'
 
+// ── Marketing ──
+export { HeroPill } from './components/marketing/HeroPill'
+export type { HeroPillProps } from './components/marketing/HeroPill'
 
+export { StatBlock } from './components/marketing/StatBlock'
+export type { StatBlockProps } from './components/marketing/StatBlock'
+
+export { Marquee } from './components/marketing/Marquee'
+export type { MarqueeProps } from './components/marketing/Marquee'
+
+export { ServiceCard } from './components/marketing/ServiceCard'
+export type { ServiceCardProps } from './components/marketing/ServiceCard'
+
+export { ProcessStep } from './components/marketing/ProcessStep'
+export type { ProcessStepProps } from './components/marketing/ProcessStep'
+
+export { TechPill } from './components/marketing/TechPill'
+export type { TechPillProps } from './components/marketing/TechPill'
+
+export { FaqItem } from './components/marketing/FaqItem'
+export type { FaqItemProps } from './components/marketing/FaqItem'
