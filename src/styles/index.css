@@ -61,6 +61,21 @@
     100% { left: 140%; }
   }
 
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateX(100%); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes toast-out {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(100%); }
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
   .bn-animate-pulse   { animation: bn-pulse   2s ease-in-out infinite; }
   .bn-animate-float   { animation: bn-float   3s ease-in-out infinite; }
   .bn-animate-marquee { animation: bn-marquee linear infinite; }

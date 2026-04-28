@@ -61,3 +61,28 @@ export type { TechPillProps } from './components/marketing/TechPill'
 
 export { FaqItem } from './components/marketing/FaqItem'
 export type { FaqItemProps } from './components/marketing/FaqItem'
+
+// ── App UI ──
+export { StatusBadge } from './components/app/StatusBadge'
+export type { StatusBadgeProps } from './components/app/StatusBadge'
+
+export { DataTable } from './components/app/DataTable'
+export type { DataTableProps, Column } from './components/app/DataTable'
+
+export { FormGroup } from './components/app/FormGroup'
+export type { FormGroupProps } from './components/app/FormGroup'
+
+export { Sidebar } from './components/app/Sidebar'
+export type { SidebarProps, SidebarItem } from './components/app/Sidebar'
+
+export { PageHeader } from './components/app/PageHeader'
+export type { PageHeaderProps, BreadcrumbItem } from './components/app/PageHeader'
+
+export { EmptyState } from './components/app/EmptyState'
+export type { EmptyStateProps } from './components/app/EmptyState'
+
+export { ProgressBar } from './components/app/ProgressBar'
+export type { ProgressBarProps } from './components/app/ProgressBar'
+
+export { Toast, ToastProvider, useToast } from './components/app/Toast'
+export type { ToastProps, ToastMessage, ToastVariant } from './components/app/Toast'
