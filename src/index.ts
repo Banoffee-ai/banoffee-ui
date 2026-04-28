@@ -4,6 +4,9 @@
 
 // ── Utilities ──
 export { cn } from './utils/cn'
+export { useMediaQuery } from './utils/useMediaQuery'
+export { useIntersectionObserver } from './utils/useIntersectionObserver'
+export { useLocalStorage } from './utils/useLocalStorage'
 
 // ── Primitives ──
 export { Button } from './components/primitives/Button'
