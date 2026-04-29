@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import { cn } from '@/utils/cn'
 
 export interface Column<T> {
@@ -29,19 +30,22 @@ function SkeletonRow({ cols }: { cols: number }) {
   )
 }
 
-export function DataTable<T extends Record<string, unknown>>({
-  className,
-  columns,
-  data,
-  loading = false,
-  emptyMessage = 'No data available',
-  onRowClick,
-  striped = false,
-  ...props
-}: DataTableProps<T>) {
+function DataTableInner<T extends object>(
+  {
+    className,
+    columns,
+    data,
+    loading = false,
+    emptyMessage = 'No data available',
+    onRowClick,
+    striped = false,
+    ...props
+  }: DataTableProps<T>,
+  ref: React.ForwardedRef<HTMLTableElement>
+) {
   return (
     <div className="w-full overflow-x-auto">
-      <table className={cn('w-full border-collapse', className)} {...props}>
+      <table ref={ref} className={cn('w-full border-collapse', className)} {...props}>
         <thead>
           <tr className="bg-[var(--color-soft)]">
             {columns.map((col) => (
@@ -110,4 +114,8 @@ export function DataTable<T extends Record<string, unknown>>({
   )
 }
 
-DataTable.displayName = 'DataTable'
+export const DataTable = forwardRef(DataTableInner) as <T extends object>(
+  props: DataTableProps<T> & { ref?: React.Ref<HTMLTableElement> }
+) => React.ReactElement | null
+
+;(DataTable as unknown as { displayName: string }).displayName = 'DataTable'
