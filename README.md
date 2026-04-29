@@ -21,6 +21,7 @@ Warm-material design tokens · Tailwind v4 · Storybook · Tree-shakeable ESM + 
 - [Project Structure](#project-structure)
 - [Design Tokens](#design-tokens)
 - [Component List](#component-list)
+- [Contributing](#contributing)
 
 ---
 
@@ -57,6 +58,10 @@ npm install
 ## Running Storybook
 
 Storybook is the interactive UI for previewing all components, their variants, and props.
+
+**Live Storybook:** [https://banoffee-ai.github.io/banoffee-ui](https://banoffee-ai.github.io/banoffee-ui) *(auto-deployed on push to main)*
+
+**Run locally:**
 
 ```bash
 npm run dev
@@ -454,6 +459,12 @@ All visual tokens are defined in `src/tokens/theme.css` using Tailwind v4's `@th
 | `EmptyState` | `icon`, `title`, `description`, `action` |
 | `ProgressBar` | `value`, `label`, `showValue`, `size`, `color`, `animated` |
 | `Toast` / `useToast` | `variant` (success/error/info/warning), `title`, `description`, `duration` |
+
+---
+
+## Contributing
+
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for how to add components, code style, and PR process.
 
 ---
 
