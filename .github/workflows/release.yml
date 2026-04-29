@@ -4,6 +4,16 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 permissions:
   contents: write
@@ -16,6 +26,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
@@ -42,12 +55,36 @@ jobs:
           test -f dist/styles.css || (echo "❌ Missing dist/styles.css" && exit 1)
           echo "✅ dist/ verified"
 
+      # When triggered manually, bump the version, commit, and tag
+      - name: Bump version
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version ${{ inputs.bump }} -m "chore: release v%s"
+          echo "NEW_TAG=v$(node -p 'require(\"./package.json\").version')" >> $GITHUB_ENV
+
+      - name: Push version commit and tag
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git push origin main
+          git push origin ${{ env.NEW_TAG }}
+
       - name: Publish to GitHub Packages
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Determine tag for release
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "RELEASE_TAG=${{ env.NEW_TAG }}" >> $GITHUB_ENV
+          else
+            echo "RELEASE_TAG=${{ github.ref_name }}" >> $GITHUB_ENV
+          fi
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.RELEASE_TAG }}
           generate_release_notes: true

@@ -295,20 +295,23 @@ echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_PAT" >> ~/.npmrc
 
 ### Automated release via CI (recommended)
 
-Push a version tag and GitHub Actions handles the rest:
+**Option A: From GitHub Actions UI (easiest)**
+
+1. Go to **GitHub → Actions → "Release & Publish"**
+2. Click **"Run workflow"**
+3. Select version bump: `patch`, `minor`, or `major`
+4. Click **"Run workflow"**
+
+The workflow automatically bumps the version, commits, tags, publishes to GitHub Packages, and creates a GitHub Release.
+
+**Option B: Push a tag locally**
 
 ```bash
-# 1. Bump version
 npm version patch   # or minor / major
-
-# 2. Push the tag
 git push && git push --tags
 ```
 
-The `release.yml` workflow will automatically:
-- Run type-check, tests, and build
-- Publish to GitHub Packages
-- Create a GitHub Release with auto-generated release notes
+The `release.yml` workflow triggers on the tag and publishes automatically.
 
 ### Using the publish script (local)
 
