@@ -1,6 +1,6 @@
 {
   "name": "@banoffee-ai/ui",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Banoffee.ai design system — shared component library for eClarify, Vidhik, and banoffee.ai. Published via GitHub Packages.",
   "author": "Banoffee.ai",
   "license": "MIT",
