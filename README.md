@@ -16,6 +16,7 @@ Warm-material design tokens · Tailwind v4 · Storybook · Tree-shakeable ESM + 
 - [Running Tests](#running-tests)
 - [Consuming in a React / Next.js Project](#consuming-in-a-react--nextjs-project)
 - [Consuming in a Plain HTML Project](#consuming-in-a-plain-html-project)
+- [CI/CD & Deployment Setup](#cicd--deployment-setup)
 - [Publishing a New Version](#publishing-a-new-version)
 - [Project Structure](#project-structure)
 - [Design Tokens](#design-tokens)
@@ -265,6 +266,16 @@ Then follow the React instructions above.
 ```
 
 > **Note:** For production use, a proper bundler (Vite, webpack, etc.) is strongly recommended.
+
+---
+
+## CI/CD & Deployment Setup
+
+For deploying apps that consume this library, see the **[Consuming Guide](docs/consuming-guide.md)** which covers:
+
+- How PAT authentication works (install-time only, not runtime)
+- Setup for **Vercel**, **GitHub Actions**, **Netlify**, **AWS Amplify**, and **Docker**
+- Troubleshooting common auth errors
 
 ---
 
