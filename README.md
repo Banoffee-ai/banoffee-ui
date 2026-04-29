@@ -1,6 +1,7 @@
-# @banoffee/ui
+# @banoffee-ai/ui
 
 > Shared React component library & design system for **banoffee.ai**, **eClarify**, and **Vidhik**.
+> Published via **GitHub Packages** (private npm registry).
 
 Warm-material design tokens · Tailwind v4 · Storybook · Tree-shakeable ESM + CJS
 
@@ -118,30 +119,42 @@ npm run type-check
 
 ## Consuming in a React / Next.js Project
 
-### 1. Install the package
+### 1. Configure GitHub Packages registry
 
-```bash
-npm install @banoffee/ui
+Each consuming project needs a `.npmrc` file in its root:
+
+```ini
+# .npmrc
+@banoffee-ai:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
-### 2. Import the styles
+Set `GITHUB_TOKEN` as an environment variable (a GitHub PAT with `read:packages` scope).
+
+### 2. Install the package
+
+```bash
+npm install @banoffee-ai/ui
+```
+
+### 3. Import the styles
 
 Add to your app's entry CSS file (e.g., `src/index.css`, `globals.css`, or `app/layout.tsx`):
 
 ```css
 /* In a CSS file */
-@import '@banoffee/ui/styles';
+@import '@banoffee-ai/ui/styles';
 ```
 
 ```tsx
 // Or in Next.js app/layout.tsx
-import '@banoffee/ui/styles'
+import '@banoffee-ai/ui/styles'
 ```
 
-### 3. Use components
+### 4. Use components
 
 ```tsx
-import { Button, Card, Eyebrow, StatusBadge } from '@banoffee/ui'
+import { Button, Card, Eyebrow, StatusBadge } from '@banoffee-ai/ui'
 
 export function MyPage() {
   return (
@@ -157,7 +170,7 @@ export function MyPage() {
 }
 ```
 
-### 4. Tailwind integration (if your app uses Tailwind)
+### 5. Tailwind integration (if your app uses Tailwind)
 
 Add the library to your content scanning so Tailwind generates the needed utility classes:
 
@@ -165,16 +178,16 @@ Add the library to your content scanning so Tailwind generates the needed utilit
 // your app's tailwind.config.ts
 content: [
   './src/**/*.{ts,tsx}',
-  './node_modules/@banoffee/ui/dist/**/*.js',
+  './node_modules/@banoffee-ai/ui/dist/**/*.js',
 ]
 ```
 
-### 5. Toast system setup
+### 6. Toast system setup
 
 Wrap your app with `ToastProvider` and use the `useToast` hook:
 
 ```tsx
-import { ToastProvider, useToast } from '@banoffee/ui'
+import { ToastProvider, useToast } from '@banoffee-ai/ui'
 
 function App() {
   return (
@@ -201,12 +214,17 @@ function MyComponent() {
 
 Since this is a React component library, it requires React to run. For a plain HTML project, you'll need a minimal React setup:
 
-### Option A: Use a bundler (Vite)
+### Option A: Use a bundler (Vite — recommended)
 
 ```bash
 npm create vite@latest my-app -- --template react-ts
 cd my-app
-npm install @banoffee/ui
+```
+
+Add `.npmrc` for GitHub Packages (see above), then:
+
+```bash
+npm install @banoffee-ai/ui
 ```
 
 Then follow the React instructions above.
@@ -218,7 +236,7 @@ Then follow the React instructions above.
 <html>
 <head>
   <!-- Load the library's styles -->
-  <link rel="stylesheet" href="./node_modules/@banoffee/ui/dist/styles.css">
+  <link rel="stylesheet" href="./node_modules/@banoffee-ai/ui/dist/styles.css">
 </head>
 <body>
   <div id="root"></div>
@@ -229,7 +247,7 @@ Then follow the React instructions above.
       "react": "https://esm.sh/react@18",
       "react-dom/client": "https://esm.sh/react-dom@18/client",
       "react/jsx-runtime": "https://esm.sh/react@18/jsx-runtime",
-      "@banoffee/ui": "./node_modules/@banoffee/ui/dist/index.js"
+      "@banoffee-ai/ui": "./node_modules/@banoffee-ai/ui/dist/index.js"
     }
   }
   </script>
@@ -237,7 +255,7 @@ Then follow the React instructions above.
   <script type="module">
     import { createRoot } from 'react-dom/client'
     import { createElement } from 'react'
-    import { Button } from '@banoffee/ui'
+    import { Button } from '@banoffee-ai/ui'
 
     const root = createRoot(document.getElementById('root'))
     root.render(createElement(Button, { variant: 'primary' }, 'Hello Banoffee'))
@@ -252,11 +270,16 @@ Then follow the React instructions above.
 
 ## Publishing a New Version
 
+Packages are published to **GitHub Packages** (`npm.pkg.github.com`), not the public npm registry.
+
 ### One-time setup
 
+1. Create a GitHub Personal Access Token (PAT) with `write:packages` scope
+2. Authenticate:
+
 ```bash
-npm login          # Login to npmjs.com
-npm whoami         # Verify you're logged in
+# Add to your global ~/.npmrc (NOT the repo .npmrc)
+echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_PAT" >> ~/.npmrc
 ```
 
 ### Using the publish script
@@ -291,8 +314,8 @@ npm run build
 # 3. Bump version
 npm version patch   # or minor / major
 
-# 4. Publish
-npm publish --access public
+# 4. Publish to GitHub Packages
+npm publish
 
 # 5. Push tags
 git push && git push --tags

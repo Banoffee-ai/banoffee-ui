@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # ─────────────────────────────────────────────
-# @banoffee/ui — Build, Test & Publish Script
+# @banoffee-ai/ui — Build, Test & Publish Script
+# Publishes to GitHub Packages (npm.pkg.github.com)
 # ─────────────────────────────────────────────
 # Usage:
 #   ./scripts/publish.sh <patch|minor|major> [--dry-run]
@@ -12,6 +13,11 @@ set -euo pipefail
 #   ./scripts/publish.sh minor           # New component release
 #   ./scripts/publish.sh major           # Breaking change release
 #   ./scripts/publish.sh patch --dry-run # Preview without publishing
+#
+# Prerequisites:
+#   1. Authenticate with GitHub Packages:
+#      echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_PAT" >> ~/.npmrc
+#   2. Your PAT needs `write:packages` scope
 
 BUMP="${1:-}"
 DRY_RUN=false
@@ -26,9 +32,10 @@ if [[ "${2:-}" == "--dry-run" ]]; then
 fi
 
 echo ""
-echo "╔══════════════════════════════════════╗"
-echo "║   @banoffee/ui — Publish Pipeline    ║"
-echo "╚══════════════════════════════════════╝"
+echo "╔══════════════════════════════════════════╗"
+echo "║  @banoffee-ai/ui — Publish Pipeline      ║"
+echo "║  Registry: GitHub Packages               ║"
+echo "╚══════════════════════════════════════════╝"
 echo ""
 
 # ── Step 1: Check we're on main ──
@@ -111,16 +118,16 @@ if $DRY_RUN; then
   git tag -d "v${NEW_VERSION}" 2>/dev/null || true
   git checkout package.json package-lock.json
 else
-  echo "🚀 Publishing @banoffee/ui@${NEW_VERSION}..."
-  npm publish --access public
+  echo "🚀 Publishing @banoffee-ai/ui@${NEW_VERSION} to GitHub Packages..."
+  npm publish
   echo ""
   echo "📤 Pushing to remote..."
   git push
   git push --tags
   echo ""
-  echo "╔══════════════════════════════════════╗"
-  echo "║  ✅ Published @banoffee/ui@${NEW_VERSION}   ║"
-  echo "╚══════════════════════════════════════╝"
+  echo "╔══════════════════════════════════════════╗"
+  echo "║  ✅ Published @banoffee-ai/ui@${NEW_VERSION}     ║"
+  echo "╚══════════════════════════════════════════╝"
 fi
 
 echo ""

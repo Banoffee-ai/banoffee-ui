@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `@banoffee/ui` will be documented in this file.
+All notable changes to `@banoffee-ai/ui` will be documented in this file.
 
 ## [0.1.0] — 2026-04-28
 
@@ -13,5 +13,6 @@ All notable changes to `@banoffee/ui` will be documented in this file.
 - **Utility hooks** — useMediaQuery, useIntersectionObserver, useLocalStorage
 - **Design tokens** — Full Banoffee brand palette, typography scale, spacing, shadows, transitions via Tailwind v4 @theme
 - **Storybook** — Stories for all 22 components with autodocs
-- **Testing** — 69 tests across 13 test files covering all primitives, layout, marketing, and app components
+- **Testing** — 161 tests across 25 test files covering all components
 - **Build** — ESM + CJS dual output, TypeScript declarations, tree-shakeable, `'use client'` banner
+- **Publishing** — GitHub Packages registry, automated `scripts/publish.sh`
