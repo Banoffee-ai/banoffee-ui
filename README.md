@@ -293,7 +293,24 @@ Packages are published to **GitHub Packages** (`npm.pkg.github.com`), not the pu
 echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_PAT" >> ~/.npmrc
 ```
 
-### Using the publish script
+### Automated release via CI (recommended)
+
+Push a version tag and GitHub Actions handles the rest:
+
+```bash
+# 1. Bump version
+npm version patch   # or minor / major
+
+# 2. Push the tag
+git push && git push --tags
+```
+
+The `release.yml` workflow will automatically:
+- Run type-check, tests, and build
+- Publish to GitHub Packages
+- Create a GitHub Release with auto-generated release notes
+
+### Using the publish script (local)
 
 A convenience script handles the full workflow:
 
@@ -311,7 +328,7 @@ A convenience script handles the full workflow:
 ./scripts/publish.sh patch --dry-run
 ```
 
-### Manual publish workflow
+### Manual publish workflow (local)
 
 ```bash
 # 1. Ensure clean main branch
